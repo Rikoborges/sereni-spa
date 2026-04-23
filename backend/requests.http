@@ -1,0 +1,19 @@
+### Registrar novo cliente
+POST http://localhost:5000/api/auth/inscription
+Content-Type: application/json
+
+{
+  "nom": "João Silva",
+  "email": "joao@example.com",
+  "telephone": "123456789",
+  "motDePasse": "senha123456"
+}
+
+### Login
+POST http://localhost:5000/api/auth/connexion
+Content-Type: application/json
+
+{
+  "email": "joao@example.com",
+  "motDePasse": "senha123456"
+}
