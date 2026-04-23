@@ -1,27 +1,19 @@
-// backend/src/routes/auth.js
-// Garantir que JWT_SECRET existe
-if (!process.env.JWT_SECRET) {
-  console.error('❌ JWT_SECRET não definido no .env');
-  process.env.JWT_SECRET = 'seu_segredo_super_secreto_minimo_32_caracteres_temporario';
-}
-
-
+// backend/src/app.js
+// Configuration Express
 
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 
-// Créer l'application Express
 const app = express();
 
-
-app.use(helmet()); // En-têtes de sécurité
+// Middlewares de sécurité
+app.use(helmet());
 app.use(cors({
   origin: process.env.FRONTEND_URL || 'http://localhost:3000',
   credentials: true
 }));
 
-// Middleware pour lire JSON
 app.use(express.json());
 
 // Route de test
@@ -29,17 +21,21 @@ app.get('/', (req, res) => {
   res.json({ message: 'Serveur SereniSpa fonctionne!' });
 });
 
-// Import routes
+// Routes
 const authRoutes = require('./routes/auth');
+const agendementRoutes = require('./routes/agendements');
+const massagistesRoutes = require('./routes/massagistes');
+const servicesRoutes = require('./routes/services');
+const adminRoutes = require('./routes/admin');
 
-//
+app.use('/api/admin', adminRoutes);
+app.use('/api/services', servicesRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/agendements', agendementRoutes);
+app.use('/api/massagistes', massagistesRoutes);
 
-
-// Importar middleware de autenticação
+// Rota protégée de test
 const validerToken = require('./middlewares/authentification');
-
-// Rota protegida - teste
 app.get('/api/profile', validerToken, (req, res) => {
   res.json({ 
     message: 'Vous êtes authentifié!',
@@ -47,11 +43,5 @@ app.get('/api/profile', validerToken, (req, res) => {
     role: req.role 
   });
 });
-
-// Importer les routes d'agendements
-const agendementRoutes = require('./routes/agendements');
-
-// Utiliser les routes
-app.use('/api/agendements', agendementRoutes);
 
 module.exports = app;
