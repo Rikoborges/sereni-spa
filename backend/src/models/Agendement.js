@@ -28,11 +28,8 @@ const schemaAgendement = new mongoose.Schema({
     required: [true, "L'heure est obligatoire"]
   },
   heureFin: {
-    type: String, // Calculé automatiquement
-    default: function() {
-      // Ajouter 55 minutes à l'heure de début
-      return this.heure; // À implémenter plus tard
-    }
+    type: String, // Format: "14:55"
+    default: null
   },
   statut: {
     type: String,

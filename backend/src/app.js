@@ -35,8 +35,23 @@ const authRoutes = require('./routes/auth');
 //
 app.use('/api/auth', authRoutes);
 
-// 
-module.exports = app;
 
-// Exporter l'application (vous allez l'utiliser dans server.js)
+// Importar middleware de autenticação
+const validerToken = require('./middlewares/authentification');
+
+// Rota protegida - teste
+app.get('/api/profile', validerToken, (req, res) => {
+  res.json({ 
+    message: 'Vous êtes authentifié!',
+    clientId: req.clientId,
+    role: req.role 
+  });
+});
+
+// Importer les routes d'agendements
+const agendementRoutes = require('./routes/agendements');
+
+// Utiliser les routes
+app.use('/api/agendements', agendementRoutes);
+
 module.exports = app;

@@ -17,3 +17,12 @@ Content-Type: application/json
   "email": "joao@example.com",
   "motDePasse": "senha123456"
 }
+
+### Acessar rota protegida (SEM token - deve falhar)
+GET http://localhost:5000/api/profile
+
+###
+
+### Acessar rota protegida (COM token - deve funcionar)
+GET http://localhost:5000/api/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRJZCI6IjY5ZTllOTdlYTAyOTAwMzYxN2U1MWY4MyIsInJvbGUiOiJjbGllbnQiLCJpYXQiOjE3NzY5MzgxOTksImV4cCI6MTc3NzU0Mjk5OX0.BoPnw6abapXdMGKo1JF_mOizubeWigQkzCKhG2Y-8fw
