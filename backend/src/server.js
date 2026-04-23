@@ -1,11 +1,18 @@
 // backend/src/server.js
-// Démarrer le serveur Express
+// Variáveis hardcoded para testar (TEMPORÁRIO)
+process.env.MONGODB_URI = 'mongodb+srv://rico3836_db-user:!Rikko61612730@cluster1.cmqnudr.mongodb.net/sereni-spa?appName=Cluster1';
+process.env.PORT = 5000;
 
-require('dotenv').config(); // Charger les variables du .env
 const app = require('./app');
+const connecterDB = require('./config/database');
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  console.log(`✅ Serveur lancé sur http://localhost:${PORT}`);
+connecterDB().then(() => {
+  app.listen(PORT, () => {
+    console.log(`✅ Serveur lancé sur http://localhost:${PORT}`);
+  });
+}).catch(erro => {
+  console.error(' Erreur:', erro.message);
+  process.exit(1);
 });

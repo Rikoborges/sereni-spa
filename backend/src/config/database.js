@@ -1,15 +1,21 @@
 // backend/src/config/database.js
-// Connecter à MongoDB (comme page 60-65 du PDF)
-
 const mongoose = require('mongoose');
 
 const connecterDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URI);
-    console.log(' MongoDB connecté avec succès!');
-  } catch (erreur) {
-    console.error(' Erreur de connexion MongoDB:', erreur.message);
-    process.exit(1); // Arrêter le serveur si connexion échoue
+    const uri = process.env.MONGODB_URI;
+    console.log('🔍 URI tentando conectar:', uri ? 'EXISTE' : 'NÃO EXISTE');
+    console.log('🔍 Todas as variáveis:', Object.keys(process.env).filter(k => k.includes('MONGO')));
+    
+    if (!uri) {
+      throw new Error('MONGODB_URI não definido no .env');
+    }
+    
+    await mongoose.connect(uri);
+    console.log('✅ MongoDB conectado com sucesso!');
+  } catch (erro) {
+    console.error('❌ Erro:', erro.message);
+    process.exit(1);
   }
 };
 
