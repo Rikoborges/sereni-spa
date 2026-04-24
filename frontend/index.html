@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SereniSpa — Massage & Bien-être à Valence</title>
+  <meta name="description" content="SereniSpa à Valence — massages thérapeutiques et soins bien-être. Réservez en ligne votre séance de relaxation avec nos praticiens certifiés.">
+  <meta property="og:title" content="SereniSpa — Massage & Bien-être à Valence">
+  <meta property="og:description" content="Massages thérapeutiques, soins personnalisés. Réservez en ligne.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="src/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Combien coûte un massage bien-être à Valence ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Nos soins sont proposés à partir de 65 € pour 55 minutes. Le tarif moyen en France est d'environ 1 € la minute."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Comment réserver un massage en ligne ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Créez votre espace client en 30 secondes, choisissez votre massagiste, votre soin et votre créneau. La réservation est confirmée instantanément."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Faut-il se déshabiller pour un massage ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "La plupart de nos soins se pratiquent en sous-vêtements. Votre praticien vous guidera et respecte toujours votre intimité."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Le massage est-il remboursé par la mutuelle ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Certaines mutuelles commencent à rembourser les séances de massage bien-être. Renseignez-vous auprès de la vôtre."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="navbar-logo">SERENI<span>SPA</span></div>
+    <ul class="navbar-links">
+      <li><a href="#soins">Nos soins</a></li>
+      <li><a href="#equipe">L'équipe</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="navbar-actions">
+      <button class="btn btn-primary" id="btn-reserver">Réserver</button>
+    </div>
+    <button class="burger" id="burger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#soins">Nos soins</a>
+    <a href="#equipe">L'équipe</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
+    <button class="btn btn-primary" id="btn-reserver-mobile">Réserver</button>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="label-sm">Massage & Bien-être · Valence</span>
+      <h1 class="title-xl hero-title">
+        L'art du soin,<br>pour votre <em>équilibre</em>
+      </h1>
+      <p class="hero-sub">Massages thérapeutiques · Soins personnalisés · Praticiens certifiés</p>
+      <div class="hero-actions">
+        <button class="btn btn-mocha" id="btn-hero-reserver">Prendre rendez-vous</button>
+        <a href="#soins" class="btn btn-outline">Découvrir nos soins</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONFIANCE -->
+  <section class="section" style="background:#fff; padding: 2.5rem 2rem;">
+    <div class="confiance-grid">
+      <div class="confiance-item anim-up">
+        <div class="confiance-number">3</div>
+        <div class="confiance-label">Praticiens certifiés</div>
+      </div>
+      <div class="confiance-item anim-up" style="transition-delay:0.1s">
+        <div class="confiance-number">250+</div>
+        <div class="confiance-label">Clients satisfaits</div>
+      </div>
+      <div class="confiance-item anim-up" style="transition-delay:0.2s">
+        <div class="confiance-number">55 min</div>
+        <div class="confiance-label">Séances dédiées</div>
+      </div>
+      <div class="confiance-item anim-up" style="transition-delay:0.3s">
+        <div class="confiance-number">100%</div>
+        <div class="confiance-label">Huiles biologiques</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section" id="soins">
+    <div class="section-header anim-up">
+      <span class="label-sm">Nos soins</span>
+      <h2 class="title-lg">Choisissez votre moment</h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card anim-up" style="transition-delay:0.1s">
+        <div class="service-icon">🌿</div>
+        <div class="service-name">Massage suédois</div>
+        <p class="service-desc">Relaxation profonde du corps entier. Idéal pour libérer les tensions musculaires et retrouver l'équilibre.</p>
+        <div class="service-meta">
+          <span class="service-price">65 €</span>
+          <span class="service-duration">· 55 min</span>
+        </div>
+      </div>
+      <div class="service-card anim-up" style="transition-delay:0.2s">
+        <div class="service-icon">🪨</div>
+        <div class="service-name">Massage aux pierres</div>
+        <p class="service-desc">Chaleur et équilibre. Notre soin signature combine pierres volcaniques et huiles essentielles biologiques.</p>
+        <div class="service-meta">
+          <span class="service-price">85 €</span>
+          <span class="service-duration">· 55 min</span>
+        </div>
+      </div>
+      <div class="service-card anim-up" style="transition-delay:0.3s">
+        <div class="service-icon">✨</div>
+        <div class="service-name">Soin visage</div>
+        <p class="service-desc">Éclat naturel et hydratation profonde. Protocole personnalisé avec des actifs certifiés biologiques.</p>
+        <div class="service-meta">
+          <span class="service-price">75 €</span>
+          <span class="service-duration">· 55 min</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EQUIPE -->
+  <section class="section" id="equipe" style="background:#fff;">
+    <div class="section-header anim-up">
+      <span class="label-sm">L'équipe</span>
+      <h2 class="title-lg">Vos praticiens</h2>
+    </div>
+    <div class="massagistes-grid" id="massagistes-container">
+      <div class="massagiste-card anim-up" style="transition-delay:0.1s">
+        <div class="massagiste-avatar">ML</div>
+        <div class="massagiste-name">Marie Laurent</div>
+        <div class="massagiste-spec">Massage suédois · Pierres</div>
+      </div>
+      <div class="massagiste-card anim-up" style="transition-delay:0.2s">
+        <div class="massagiste-avatar">SB</div>
+        <div class="massagiste-name">Sophie Bernard</div>
+        <div class="massagiste-spec">Soins visage · Relaxation</div>
+      </div>
+      <div class="massagiste-card anim-up" style="transition-delay:0.3s">
+        <div class="massagiste-avatar">CM</div>
+        <div class="massagiste-name">Claire Martin</div>
+        <div class="massagiste-spec">Massage aux pierres · Ayurvéda</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRIP CTA -->
+  <section class="strip-cta">
+    <h2 class="title-md"><em>Vous y pensez depuis un moment.</em><br>C'est le signe.</h2>
+    <p>Votre prochain soin est à quelques clics. Sans attente, sans téléphone.</p>
+    <button class="btn btn-outline" id="btn-strip-reserver">Réserver maintenant</button>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="section-header anim-up">
+      <span class="label-sm">Questions fréquentes</span>
+      <h2 class="title-lg">Tout ce que vous voulez savoir</h2>
+    </div>
+    <div class="faq-list anim-up">
+      <div class="faq-item">
+        <button class="faq-question">
+          Combien coûte un massage bien-être à Valence ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Nos soins sont proposés à partir de 65 € pour une séance de 55 minutes. Le tarif moyen en France est d'environ 1 € la minute — nous sommes dans cette fourchette avec des praticiens certifiés et des produits biologiques inclus.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          Comment réserver un massage en ligne ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Créez votre espace client en 30 secondes, choisissez votre massagiste, votre soin et votre créneau disponible. La confirmation est immédiate — sans téléphone, sans attente.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          Faut-il se déshabiller pour un massage ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>La plupart de nos soins se pratiquent en sous-vêtements. Votre praticien vous guidera avant la séance et respecte toujours votre confort et votre intimité.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          Le massage est-il remboursé par ma mutuelle ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Certaines mutuelles commencent à rembourser les séances de massage bien-être, souvent sur prescription du médecin. Renseignez-vous auprès de votre mutuelle — nous vous fournissons un justificatif de séance.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          Puis-je annuler ou reporter mon rendez-vous ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Oui. Depuis votre espace client, vous pouvez annuler votre agendement à tout moment. Nous vous demandons de le faire au moins 24h à l'avance par respect pour votre praticien.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer" id="contact">
+    <div class="footer-logo">SERENI<span>SPA</span></div>
+    <p class="footer-sub">Valence, France · contact@serenispa.fr · +33 4 75 XX XX XX</p>
+    <div class="footer-links">
+      <a href="#soins">Nos soins</a>
+      <a href="#equipe">L'équipe</a>
+      <a href="#faq">FAQ</a>
+      <a href="dashboard.html">Mon espace</a>
+    </div>
+    <p class="footer-copy">&copy; 2025 SereniSpa · Valence · Tous droits réservés</p>
+  </footer>
+
+  <!-- MODAL LOGIN / REGISTER -->
+  <div class="modal-overlay" id="modal-auth">
+  <div class="modal" role="dialog" aria-modal="true">
+    <button class="modal-close" id="modal-auth-close" aria-label="Fermer">&times;</button>
+    <div class="modal-header">
+      <span class="label-sm">Votre espace</span>
+      <h2 class="title-md">Bienvenue</h2>
+      <p>Connectez-vous pour réserver votre soin</p>
+    </div>
+    <div class="modal-tabs">
+      <button class="modal-tab active" data-tab="login">Connexion</button>
+      <button class="modal-tab" data-tab="register">Créer un compte</button>
+    </div>
+    
+    <!-- PANEL LOGIN -->
+    <div class="form-panel active" id="panel-login">
+      <div class="alert alert-error" id="login-error"></div>
+      <div class="form-group">
+        <label class="form-label" for="login-email">Adresse e-mail</label>
+        <input class="form-input" type="email" id="login-email" placeholder="votre@email.com" autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="login-password">Mot de passe</label>
+        <input class="form-input" type="password" id="login-password" placeholder="••••••••" autocomplete="current-password">
+      </div>
+      <button class="btn btn-primary btn-full" id="btn-login">Se connecter</button>
+    </div>
+    
+    <!-- PANEL REGISTER -->
+    <div class="form-panel" id="panel-register">
+      <div class="alert alert-error" id="register-error"></div>
+      <div class="form-group">
+        <label class="form-label" for="register-nom">Nom complet</label>
+        <input class="form-input" type="text" id="register-nom" placeholder="Marie Dupont" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="register-email">Adresse e-mail</label>
+        <input class="form-input" type="email" id="register-email" placeholder="votre@email.com" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="register-telephone">Téléphone</label>
+        <input class="form-input" type="tel" id="register-telephone" placeholder="+33 6 12 34 56 78" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="register-password">Mot de passe</label>
+        <input class="form-input" type="password" id="register-password" placeholder="Minimum 6 caractères" required>
+      </div>
+      <button class="btn btn-primary btn-full" id="btn-register">Créer mon espace</button>
+    </div>
+  </div>
+</div>
+
+  <!-- MODAL RESERVA EM STEPS -->
+  <div class="modal-overlay" id="modal-booking">
+    <div class="modal" role="dialog" aria-modal="true" style="max-width:440px;">
+      <button class="modal-close" id="modal-booking-close" aria-label="Fermer">&times;</button>
+      <div class="modal-header">
+        <span class="label-sm">Réservation</span>
+        <h2 class="title-md" id="booking-title">Choisir un praticien</h2>
+      </div>
+      <div class="steps-nav">
+        <div class="step-dot active" data-step="1">Praticien</div>
+        <div class="step-dot" data-step="2">Soin</div>
+        <div class="step-dot" data-step="3">Date & heure</div>
+        <div class="step-dot" data-step="4">Confirmer</div>
+      </div>
+
+      <!-- STEP 1 — MASSAGISTE -->
+      <div class="step-panel active" id="step-1">
+        <div id="massagistes-options">
+          <button class="massagiste-option" data-id="1" data-nom="Marie Laurent" data-spec="Massage suédois · Pierres">
+            <div class="massagiste-option-avatar">ML</div>
+            <div class="massagiste-option-info">
+              <strong>Marie Laurent</strong>
+              <span>Massage suédois · Pierres</span>
+            </div>
+          </button>
+          <button class="massagiste-option" data-id="2" data-nom="Sophie Bernard" data-spec="Soins visage · Relaxation">
+            <div class="massagiste-option-avatar">SB</div>
+            <div class="massagiste-option-info">
+              <strong>Sophie Bernard</strong>
+              <span>Soins visage · Relaxation</span>
+            </div>
+          </button>
+          <button class="massagiste-option" data-id="3" data-nom="Claire Martin" data-spec="Massage aux pierres · Ayurvéda">
+            <div class="massagiste-option-avatar">CM</div>
+            <div class="massagiste-option-info">
+              <strong>Claire Martin</strong>
+              <span>Massage aux pierres · Ayurvéda</span>
+            </div>
+          </button>
+        </div>
+        <div class="step-actions">
+          <button class="btn btn-primary" id="step1-next" disabled>Continuer</button>
+        </div>
+      </div>
+
+      <!-- STEP 2 — SERVICE -->
+      <div class="step-panel" id="step-2">
+        <button class="service-option" data-id="1" data-nom="Massage suédois" data-prix="65">
+          <div>
+            <div class="service-option-name">Massage suédois</div>
+            <div class="service-option-meta">55 min · Relaxation profonde</div>
+          </div>
+          <div class="service-option-price">65 €</div>
+        </button>
+        <button class="service-option" data-id="2" data-nom="Massage aux pierres" data-prix="85">
+          <div>
+            <div class="service-option-name">Massage aux pierres</div>
+            <div class="service-option-meta">55 min · Soin signature</div>
+          </div>
+          <div class="service-option-price">85 €</div>
+        </button>
+        <button class="service-option" data-id="3" data-nom="Soin visage" data-prix="75">
+          <div>
+            <div class="service-option-name">Soin visage</div>
+            <div class="service-option-meta">55 min · Éclat naturel</div>
+          </div>
+          <div class="service-option-price">75 €</div>
+        </button>
+        <div class="step-actions">
+          <button class="btn btn-back" id="step2-back">Retour</button>
+          <button class="btn btn-primary" id="step2-next" disabled>Continuer</button>
+        </div>
+      </div>
+
+      <!-- STEP 3 — DATE + SLOTS -->
+      <div class="step-panel" id="step-3">
+        <div class="form-group">
+          <label class="form-label" for="booking-date">Date souhaitée</label>
+          <input class="form-input" type="date" id="booking-date">
+        </div>
+        <div id="slots-container" style="display:none;">
+          <label class="form-label" style="margin-bottom:8px;">Créneaux disponibles</label>
+          <div class="slots-grid" id="slots-grid"></div>
+        </div>
+        <div id="slots-loading" style="display:none; font-size:13px; color:var(--brun-light); padding:8px 0;">Chargement des créneaux...</div>
+        <div class="step-actions">
+          <button class="btn btn-back" id="step3-back">Retour</button>
+          <button class="btn btn-primary" id="step3-next" disabled>Continuer</button>
+        </div>
+      </div>
+
+      <!-- STEP 4 — CONFIRMER -->
+      <div class="step-panel" id="step-4">
+        <div class="booking-summary" id="booking-summary"></div>
+        <div class="alert alert-error" id="booking-error"></div>
+        <div class="step-actions">
+          <button class="btn btn-back" id="step4-back">Retour</button>
+          <button class="btn btn-mocha" id="btn-confirmer">Confirmer</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="src/script.js" defer></script>
+</body>
+</html>

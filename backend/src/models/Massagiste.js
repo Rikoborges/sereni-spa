@@ -25,11 +25,11 @@ const schemaMassagiste = new mongoose.Schema({
     type: String, // Format: "17:00"
     default: '17:00'
   },
-  joursOuverts: {
-    type: [String],
-    enum: ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'],
-    default: ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi']
-  },
+ joursOuverts: {
+  type: [String],
+  enum: ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'],
+  default: ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi']
+},
   dateCreation: {
     type: Date,
     default: Date.now

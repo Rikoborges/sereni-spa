@@ -1,6 +1,3 @@
-// backend/src/routes/agendements.js
-// Routes d'agendement de massages
-
 const express = require('express');
 const router = express.Router();
 const Agendement = require('../models/Agendement');

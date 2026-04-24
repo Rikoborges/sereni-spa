@@ -43,6 +43,22 @@ router.get('/:id/slots-disponibles', async (req, res) => {
       return res.status(404).json({ erreur: 'Massagiste non trouvé' });
     }
 
+    // Vérifier si c'est un jour ouvert
+    const dateObj = new Date(date + 'T12:00');
+    const joursMap = {
+      0: 'dimanche',
+      1: 'lundi',
+      2: 'mardi',
+      3: 'mercredi',
+      4: 'jeudi',
+      5: 'vendredi',
+      6: 'samedi'
+    };
+    const jourActuel = joursMap[dateObj.getDay()];
+    if (!massagiste.joursOuverts.includes(jourActuel)) {
+      return res.status(400).json({ erreur: `Le spa est fermé le ${jourActuel}` });
+    }
+
     // Générer les slots de 55 minutes
     const slots = genererSlots(
       massagiste.horaireDébut,

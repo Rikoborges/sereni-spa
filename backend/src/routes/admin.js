@@ -5,7 +5,6 @@ const express = require('express');
 const router = express.Router();
 const Agendement = require('../models/Agendement');
 const validerToken = require('../middlewares/authentification');
-const auth = require('../middlewares/authentification');
 const adminMiddleware = require('../middlewares/adminMiddleware');
 
 // Middleware pour vérifier que c'est un admin

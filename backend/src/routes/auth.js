@@ -55,7 +55,7 @@ router.post('/connexion', async (req, res) => {
     const token = jwt.sign(
       { clientId: client._id, role: client.role },
       process.env.JWT_SECRET,
-      { expiresIn: '2h' }
+      { expiresIn: '24h' }
     );
 
     res.json({ message: 'Connexion réussie!', token, clientId: client._id });

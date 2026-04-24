@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon espace — SereniSpa</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="src/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    .dash-nav { background: var(--ivory); border-bottom: 1px solid var(--ivory-mid); padding: 0 2rem; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+    .dash-nav-logo { font-family: var(--ff-title); font-size: 1.4rem; letter-spacing: 3px; color: var(--brun); }
+    .dash-nav-logo span { color: var(--sage); }
+    .dash-nav-right { display: flex; align-items: center; gap: 1rem; }
+    .dash-greeting { font-size: 13px; color: var(--brun-light); }
+
+    .dash-main { max-width: 860px; margin: 0 auto; padding: 2.5rem 2rem; }
+    .dash-header { margin-bottom: 2rem; }
+    .dash-header h1 { font-family: var(--ff-title); font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 300; color: var(--brun); }
+    .dash-header p { font-size: 13px; color: var(--brun-light); margin-top: 4px; }
+
+    .dash-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .dash-stat { background: #fff; border: 1px solid var(--ivory-mid); border-radius: 10px; padding: 1.25rem; text-align: center; }
+    .dash-stat-value { font-family: var(--ff-title); font-size: 2rem; color: var(--sage); font-weight: 300; line-height: 1; }
+    .dash-stat-label { font-size: 11px; color: var(--brun-light); margin-top: 6px; letter-spacing: 0.5px; text-transform: uppercase; }
+
+    .dash-section-title { font-family: var(--ff-title); font-size: 1.3rem; font-weight: 400; color: var(--brun); margin-bottom: 1rem; display: flex; align-items: center; justify-content: space-between; }
+
+    .agendement-list { display: flex; flex-direction: column; gap: 10px; }
+    .agendement-card { background: #fff; border: 1px solid var(--ivory-mid); border-radius: 10px; padding: 1.25rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; transition: border-color 0.3s; }
+    .agendement-card:hover { border-color: var(--sage-light); }
+    .agendement-info { flex: 1; }
+    .agendement-soin { font-size: 15px; font-weight: 500; color: var(--brun); margin-bottom: 4px; }
+    .agendement-meta { font-size: 13px; color: var(--brun-light); }
+    .agendement-actions { display: flex; align-items: center; gap: 10px; }
+    .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; }
+    .badge-confirme { background: #e8f3ea; color: var(--sage-dark); }
+    .badge-annule { background: #fdf0f0; color: #b94040; }
+    .badge-attente { background: #fdf7ed; color: var(--mocha-dark); }
+    .btn-annuler { background: none; border: 1px solid var(--ivory-mid); border-radius: 4px; padding: 6px 12px; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--brun-light); transition: all 0.3s; cursor: pointer; }
+    .btn-annuler:hover { border-color: #b94040; color: #b94040; }
+
+    .empty-state { text-align: center; padding: 3rem 2rem; background: #fff; border: 1px solid var(--ivory-mid); border-radius: 10px; }
+    .empty-state p { color: var(--brun-light); font-size: 14px; margin-bottom: 1.5rem; }
+
+    .loading { text-align: center; padding: 2rem; color: var(--brun-light); font-size: 14px; }
+
+    @media (max-width: 600px) {
+      .agendement-card { flex-direction: column; align-items: flex-start; }
+      .agendement-actions { width: 100%; justify-content: space-between; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="dash-nav">
+    <a href="index.html" class="dash-nav-logo">SERENI<span>SPA</span></a>
+    <div class="dash-nav-right">
+      <span class="dash-greeting" id="dash-greeting"></span>
+      <button class="btn btn-ghost" id="btn-nouvelle-reservation">+ Réserver</button>
+      <button class="btn btn-primary" id="btn-logout">Déconnexion</button>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="dash-main">
+
+    <div class="dash-header">
+      <h1 id="dash-title">Mon espace</h1>
+      <p>Gérez vos rendez-vous SereniSpa</p>
+    </div>
+
+    <!-- STATS -->
+    <div class="dash-stats">
+      <div class="dash-stat">
+        <div class="dash-stat-value" id="stat-total">—</div>
+        <div class="dash-stat-label">Réservations</div>
+      </div>
+      <div class="dash-stat">
+        <div class="dash-stat-value" id="stat-prochain">—</div>
+        <div class="dash-stat-label">Prochain soin</div>
+      </div>
+      <div class="dash-stat">
+        <div class="dash-stat-value" id="stat-confirme">—</div>
+        <div class="dash-stat-label">Confirmés</div>
+      </div>
+    </div>
+
+    <!-- AGENDEMENTS -->
+    <div class="dash-section-title">
+      Mes rendez-vous
+    </div>
+
+    <div id="agendements-container">
+      <div class="loading">Chargement de vos rendez-vous...</div>
+    </div>
+
+  </main>
+
+  <!-- MODAL RESERVA (mesmo fluxo do index) -->
+  <div class="modal-overlay" id="modal-booking">
+    <div class="modal" role="dialog" aria-modal="true" style="max-width:440px;">
+      <button class="modal-close" id="modal-booking-close" aria-label="Fermer">&times;</button>
+      <div class="modal-header">
+        <span class="label-sm">Nouvelle réservation</span>
+        <h2 class="title-md" id="booking-title">Choisir un praticien</h2>
+      </div>
+      <div class="steps-nav">
+        <div class="step-dot active" data-step="1">Praticien</div>
+        <div class="step-dot" data-step="2">Soin</div>
+        <div class="step-dot" data-step="3">Date & heure</div>
+        <div class="step-dot" data-step="4">Confirmer</div>
+      </div>
+
+      <!-- STEP 1 -->
+      <div class="step-panel active" id="step-1">
+        <button class="massagiste-option" data-id="1" data-nom="Marie Laurent" data-spec="Massage suédois · Pierres">
+          <div class="massagiste-option-avatar">ML</div>
+          <div class="massagiste-option-info"><strong>Marie Laurent</strong><span>Massage suédois · Pierres</span></div>
+        </button>
+        <button class="massagiste-option" data-id="2" data-nom="Sophie Bernard" data-spec="Soins visage · Relaxation">
+          <div class="massagiste-option-avatar">SB</div>
+          <div class="massagiste-option-info"><strong>Sophie Bernard</strong><span>Soins visage · Relaxation</span></div>
+        </button>
+        <button class="massagiste-option" data-id="3" data-nom="Claire Martin" data-spec="Massage aux pierres · Ayurvéda">
+          <div class="massagiste-option-avatar">CM</div>
+          <div class="massagiste-option-info"><strong>Claire Martin</strong><span>Massage aux pierres · Ayurvéda</span></div>
+        </button>
+        <div class="step-actions"><button class="btn btn-primary" id="step1-next" disabled>Continuer</button></div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="step-panel" id="step-2">
+        <button class="service-option" data-id="1" data-nom="Massage suédois" data-prix="65">
+          <div><div class="service-option-name">Massage suédois</div><div class="service-option-meta">55 min · Relaxation profonde</div></div>
+          <div class="service-option-price">65 €</div>
+        </button>
+        <button class="service-option" data-id="2" data-nom="Massage aux pierres" data-prix="85">
+          <div><div class="service-option-name">Massage aux pierres</div><div class="service-option-meta">55 min · Soin signature</div></div>
+          <div class="service-option-price">85 €</div>
+        </button>
+        <button class="service-option" data-id="3" data-nom="Soin visage" data-prix="75">
+          <div><div class="service-option-name">Soin visage</div><div class="service-option-meta">55 min · Éclat naturel</div></div>
+          <div class="service-option-price">75 €</div>
+        </button>
+        <div class="step-actions">
+          <button class="btn btn-back" id="step2-back">Retour</button>
+          <button class="btn btn-primary" id="step2-next" disabled>Continuer</button>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="step-panel" id="step-3">
+        <div class="form-group">
+          <label class="form-label" for="booking-date">Date souhaitée</label>
+          <input class="form-input" type="date" id="booking-date">
+        </div>
+        <div id="slots-container" style="display:none;">
+          <label class="form-label" style="margin-bottom:8px;">Créneaux disponibles</label>
+          <div class="slots-grid" id="slots-grid"></div>
+        </div>
+        <div id="slots-loading" style="display:none;font-size:13px;color:var(--brun-light);padding:8px 0;">Chargement...</div>
+        <div class="step-actions">
+          <button class="btn btn-back" id="step3-back">Retour</button>
+          <button class="btn btn-primary" id="step3-next" disabled>Continuer</button>
+        </div>
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="step-panel" id="step-4">
+        <div class="booking-summary" id="booking-summary"></div>
+        <div class="alert alert-error" id="booking-error"></div>
+        <div class="step-actions">
+          <button class="btn btn-back" id="step4-back">Retour</button>
+          <button class="btn btn-mocha" id="btn-confirmer">Confirmer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="src/dashboard.js" defer></script>
+</body>
+</html>
