@@ -9,10 +9,7 @@
   <meta property="og:description" content="Massages thérapeutiques, soins personnalisés. Réservez en ligne.">
   <meta property="og:type" content="website">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="src/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -62,6 +59,7 @@
     <ul class="navbar-links">
       <li><a href="#soins">Nos soins</a></li>
       <li><a href="#equipe">L'équipe</a></li>
+      <li><a href="#galerie">Galerie</a></li>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -77,6 +75,7 @@
   <div class="mobile-menu" id="mobile-menu">
     <a href="#soins">Nos soins</a>
     <a href="#equipe">L'équipe</a>
+    <a href="#galerie">Galerie</a>
     <a href="#faq">FAQ</a>
     <a href="#contact">Contact</a>
     <button class="btn btn-primary" id="btn-reserver-mobile">Réserver</button>
@@ -164,20 +163,46 @@
     </div>
     <div class="massagistes-grid" id="massagistes-container">
       <div class="massagiste-card anim-up" style="transition-delay:0.1s">
-        <div class="massagiste-avatar">ML</div>
-        <div class="massagiste-name">Marie Laurent</div>
-        <div class="massagiste-spec">Massage suédois · Pierres</div>
+        <!-- Substituir src por foto real: assets/equipe/marie-laurent.jpg -->
+        <div class="massagiste-photo-placeholder">ML</div>
+        <div class="massagiste-card-body">
+          <div class="massagiste-name">Marie Laurent</div>
+          <div class="massagiste-spec">Massage suédois · Pierres chaudes</div>
+        </div>
       </div>
       <div class="massagiste-card anim-up" style="transition-delay:0.2s">
-        <div class="massagiste-avatar">SB</div>
-        <div class="massagiste-name">Sophie Bernard</div>
-        <div class="massagiste-spec">Soins visage · Relaxation</div>
+        <!-- Substituir src por foto real: assets/equipe/sophie-bernard.jpg -->
+        <div class="massagiste-photo-placeholder">SB</div>
+        <div class="massagiste-card-body">
+          <div class="massagiste-name">Sophie Bernard</div>
+          <div class="massagiste-spec">Soins visage · Relaxation</div>
+        </div>
       </div>
       <div class="massagiste-card anim-up" style="transition-delay:0.3s">
-        <div class="massagiste-avatar">CM</div>
-        <div class="massagiste-name">Claire Martin</div>
-        <div class="massagiste-spec">Massage aux pierres · Ayurvéda</div>
+        <!-- Substituir src por foto real: assets/equipe/claire-martin.jpg -->
+        <div class="massagiste-photo-placeholder">CM</div>
+        <div class="massagiste-card-body">
+          <div class="massagiste-name">Claire Martin</div>
+          <div class="massagiste-spec">Massage aux pierres · Ayurvéda</div>
+        </div>
       </div>
+    </div>
+  </section>
+
+  <!-- GALERIE -->
+  <section class="section" id="galerie" style="background:#fff;">
+    <div class="section-header anim-up">
+      <span class="label-sm">Ambiance</span>
+      <h2 class="title-lg">L'espace SereniSpa</h2>
+    </div>
+    <div class="gallery-grid">
+      <!-- Substituir pelas fotos reais: assets/galerie/photo-1.jpg ... -->
+      <div class="gallery-item anim-up"><div class="gallery-placeholder">🌿</div></div>
+      <div class="gallery-item anim-up" style="transition-delay:0.1s"><div class="gallery-placeholder">🪨</div></div>
+      <div class="gallery-item anim-up" style="transition-delay:0.2s"><div class="gallery-placeholder">✨</div></div>
+      <div class="gallery-item anim-up" style="transition-delay:0.15s"><div class="gallery-placeholder">🕯️</div></div>
+      <div class="gallery-item anim-up" style="transition-delay:0.25s"><div class="gallery-placeholder">🌸</div></div>
+      <div class="gallery-item anim-up" style="transition-delay:0.3s"><div class="gallery-placeholder">💆</div></div>
     </div>
   </section>
 
@@ -250,63 +275,65 @@
     <div class="footer-links">
       <a href="#soins">Nos soins</a>
       <a href="#equipe">L'équipe</a>
+      <a href="#galerie">Galerie</a>
       <a href="#faq">FAQ</a>
       <a href="dashboard.html">Mon espace</a>
+    </div>
+    <div class="footer-links" style="margin-top:-1rem;">
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="politique-confidentialite.html">Politique de confidentialité</a>
+      <a href="#" id="rgpd-reopen">Cookies</a>
     </div>
     <p class="footer-copy">&copy; 2025 SereniSpa · Valence · Tous droits réservés</p>
   </footer>
 
   <!-- MODAL LOGIN / REGISTER -->
   <div class="modal-overlay" id="modal-auth">
-  <div class="modal" role="dialog" aria-modal="true">
-    <button class="modal-close" id="modal-auth-close" aria-label="Fermer">&times;</button>
-    <div class="modal-header">
-      <span class="label-sm">Votre espace</span>
-      <h2 class="title-md">Bienvenue</h2>
-      <p>Connectez-vous pour réserver votre soin</p>
-    </div>
-    <div class="modal-tabs">
-      <button class="modal-tab active" data-tab="login">Connexion</button>
-      <button class="modal-tab" data-tab="register">Créer un compte</button>
-    </div>
-    
-    <!-- PANEL LOGIN -->
-    <div class="form-panel active" id="panel-login">
-      <div class="alert alert-error" id="login-error"></div>
-      <div class="form-group">
-        <label class="form-label" for="login-email">Adresse e-mail</label>
-        <input class="form-input" type="email" id="login-email" placeholder="votre@email.com" autocomplete="email">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" id="modal-auth-close" aria-label="Fermer">&times;</button>
+      <div class="modal-header">
+        <span class="label-sm">Votre espace</span>
+        <h2 class="title-md">Bienvenue</h2>
+        <p>Connectez-vous pour réserver votre soin</p>
       </div>
-      <div class="form-group">
-        <label class="form-label" for="login-password">Mot de passe</label>
-        <input class="form-input" type="password" id="login-password" placeholder="••••••••" autocomplete="current-password">
+      <div class="modal-tabs">
+        <button class="modal-tab active" data-tab="login">Connexion</button>
+        <button class="modal-tab" data-tab="register">Créer un compte</button>
       </div>
-      <button class="btn btn-primary btn-full" id="btn-login">Se connecter</button>
-    </div>
-    
-    <!-- PANEL REGISTER -->
-    <div class="form-panel" id="panel-register">
-      <div class="alert alert-error" id="register-error"></div>
-      <div class="form-group">
-        <label class="form-label" for="register-nom">Nom complet</label>
-        <input class="form-input" type="text" id="register-nom" placeholder="Marie Dupont" required>
+      <div class="form-panel active" id="panel-login">
+        <div class="alert alert-error" id="login-error"></div>
+        <div class="form-group">
+          <label class="form-label" for="login-email">Adresse e-mail</label>
+          <input class="form-input" type="email" id="login-email" placeholder="votre@email.com" autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="login-password">Mot de passe</label>
+          <input class="form-input" type="password" id="login-password" placeholder="••••••••" autocomplete="current-password">
+        </div>
+        <button class="btn btn-primary btn-full" id="btn-login">Se connecter</button>
       </div>
-      <div class="form-group">
-        <label class="form-label" for="register-email">Adresse e-mail</label>
-        <input class="form-input" type="email" id="register-email" placeholder="votre@email.com" required>
+      <div class="form-panel" id="panel-register">
+        <div class="alert alert-error" id="register-error"></div>
+        <div class="form-group">
+          <label class="form-label" for="register-nom">Nom complet</label>
+          <input class="form-input" type="text" id="register-nom" placeholder="Marie Dupont">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="register-email">Adresse e-mail</label>
+          <input class="form-input" type="email" id="register-email" placeholder="votre@email.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="register-telephone">Téléphone</label>
+          <input class="form-input" type="tel" id="register-telephone" placeholder="+33 6 00 00 00 00">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="register-password">Mot de passe</label>
+          <input class="form-input" type="password" id="register-password" placeholder="Minimum 6 caractères">
+        </div>
+        <button class="btn btn-primary btn-full" id="btn-register">Créer mon espace</button>
       </div>
-      <div class="form-group">
-        <label class="form-label" for="register-telephone">Téléphone</label>
-        <input class="form-input" type="tel" id="register-telephone" placeholder="+33 6 12 34 56 78" required>
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="register-password">Mot de passe</label>
-        <input class="form-input" type="password" id="register-password" placeholder="Minimum 6 caractères" required>
-      </div>
-      <button class="btn btn-primary btn-full" id="btn-register">Créer mon espace</button>
     </div>
   </div>
-</div>
 
   <!-- MODAL RESERVA EM STEPS -->
   <div class="modal-overlay" id="modal-booking">
@@ -325,61 +352,12 @@
 
       <!-- STEP 1 — MASSAGISTE -->
       <div class="step-panel active" id="step-1">
-        <div id="massagistes-options">
-          <button class="massagiste-option" data-id="1" data-nom="Marie Laurent" data-spec="Massage suédois · Pierres">
-            <div class="massagiste-option-avatar">ML</div>
-            <div class="massagiste-option-info">
-              <strong>Marie Laurent</strong>
-              <span>Massage suédois · Pierres</span>
-            </div>
-          </button>
-          <button class="massagiste-option" data-id="2" data-nom="Sophie Bernard" data-spec="Soins visage · Relaxation">
-            <div class="massagiste-option-avatar">SB</div>
-            <div class="massagiste-option-info">
-              <strong>Sophie Bernard</strong>
-              <span>Soins visage · Relaxation</span>
-            </div>
-          </button>
-          <button class="massagiste-option" data-id="3" data-nom="Claire Martin" data-spec="Massage aux pierres · Ayurvéda">
-            <div class="massagiste-option-avatar">CM</div>
-            <div class="massagiste-option-info">
-              <strong>Claire Martin</strong>
-              <span>Massage aux pierres · Ayurvéda</span>
-            </div>
-          </button>
-        </div>
-        <div class="step-actions">
-          <button class="btn btn-primary" id="step1-next" disabled>Continuer</button>
-        </div>
+        <div style="padding:1.5rem;text-align:center;color:var(--brun-light);font-size:14px;">Chargement...</div>
       </div>
 
       <!-- STEP 2 — SERVICE -->
       <div class="step-panel" id="step-2">
-        <button class="service-option" data-id="1" data-nom="Massage suédois" data-prix="65">
-          <div>
-            <div class="service-option-name">Massage suédois</div>
-            <div class="service-option-meta">55 min · Relaxation profonde</div>
-          </div>
-          <div class="service-option-price">65 €</div>
-        </button>
-        <button class="service-option" data-id="2" data-nom="Massage aux pierres" data-prix="85">
-          <div>
-            <div class="service-option-name">Massage aux pierres</div>
-            <div class="service-option-meta">55 min · Soin signature</div>
-          </div>
-          <div class="service-option-price">85 €</div>
-        </button>
-        <button class="service-option" data-id="3" data-nom="Soin visage" data-prix="75">
-          <div>
-            <div class="service-option-name">Soin visage</div>
-            <div class="service-option-meta">55 min · Éclat naturel</div>
-          </div>
-          <div class="service-option-price">75 €</div>
-        </button>
-        <div class="step-actions">
-          <button class="btn btn-back" id="step2-back">Retour</button>
-          <button class="btn btn-primary" id="step2-next" disabled>Continuer</button>
-        </div>
+        <div style="padding:1.5rem;text-align:center;color:var(--brun-light);font-size:14px;">Chargement...</div>
       </div>
 
       <!-- STEP 3 — DATE + SLOTS -->
@@ -409,6 +387,18 @@
         </div>
       </div>
 
+    </div>
+  </div>
+
+  <!-- RGPD COOKIES BANNER -->
+  <div class="rgpd-banner" id="rgpd-banner">
+    <p>
+      Nous utilisons des cookies essentiels au fonctionnement du site (session, préférences).
+      En continuant, vous acceptez notre <a href="politique-confidentialite.html">politique de confidentialité</a>.
+    </p>
+    <div class="rgpd-banner-actions">
+      <button class="btn btn-outline" id="rgpd-refuse" style="padding:10px 20px;font-size:11px;">Refuser</button>
+      <button class="btn btn-primary" id="rgpd-accept" style="padding:10px 20px;font-size:11px;">Accepter</button>
     </div>
   </div>
 

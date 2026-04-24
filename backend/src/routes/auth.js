@@ -51,6 +51,10 @@ router.post('/connexion', async (req, res) => {
       return res.status(401).json({ erreur: 'Email ou mot de passe incorrect' });
     }
 
+    // DEBUG
+console.log('JWT_SECRET:', process.env.JWT_SECRET);
+console.log('process.env:', Object.keys(process.env));
+
     // Criar JWT token
     const token = jwt.sign(
       { clientId: client._id, role: client.role },

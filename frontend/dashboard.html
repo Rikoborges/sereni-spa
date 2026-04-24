@@ -5,49 +5,174 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mon espace — SereniSpa</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="src/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    .dash-nav { background: var(--ivory); border-bottom: 1px solid var(--ivory-mid); padding: 0 2rem; height: 64px; display: flex; align-items: center; justify-content: space-between; }
-    .dash-nav-logo { font-family: var(--ff-title); font-size: 1.4rem; letter-spacing: 3px; color: var(--brun); }
+    /* ── Navbar ─────────────────────────────────────────── */
+    .dash-nav {
+      background: var(--ivory);
+      border-bottom: 1px solid var(--ivory-mid);
+      padding: 0 2rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .dash-nav-logo {
+      font-family: var(--ff-title);
+      font-size: 1.5rem;
+      letter-spacing: 4px;
+      color: var(--brun);
+      text-transform: uppercase;
+    }
     .dash-nav-logo span { color: var(--sage); }
     .dash-nav-right { display: flex; align-items: center; gap: 1rem; }
-    .dash-greeting { font-size: 13px; color: var(--brun-light); }
+    .dash-greeting {
+      font-size: 13px;
+      color: var(--brun-light);
+      font-family: var(--ff-body);
+      font-weight: 400;
+    }
 
-    .dash-main { max-width: 860px; margin: 0 auto; padding: 2.5rem 2rem; }
-    .dash-header { margin-bottom: 2rem; }
-    .dash-header h1 { font-family: var(--ff-title); font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 300; color: var(--brun); }
-    .dash-header p { font-size: 13px; color: var(--brun-light); margin-top: 4px; }
+    /* ── Layout principal ────────────────────────────────── */
+    .dash-main { max-width: 860px; margin: 0 auto; padding: 3rem 2rem; }
 
-    .dash-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
-    .dash-stat { background: #fff; border: 1px solid var(--ivory-mid); border-radius: 10px; padding: 1.25rem; text-align: center; }
-    .dash-stat-value { font-family: var(--ff-title); font-size: 2rem; color: var(--sage); font-weight: 300; line-height: 1; }
-    .dash-stat-label { font-size: 11px; color: var(--brun-light); margin-top: 6px; letter-spacing: 0.5px; text-transform: uppercase; }
+    /* ── Header ─────────────────────────────────────────── */
+    .dash-header { margin-bottom: 2.5rem; }
+    .dash-header-label {
+      font-size: 11px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--sage);
+      margin-bottom: 0.5rem;
+    }
+    .dash-header h1 {
+      font-family: var(--ff-title);
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      font-weight: 700;
+      color: var(--brun);
+      line-height: 1.2;
+    }
 
-    .dash-section-title { font-family: var(--ff-title); font-size: 1.3rem; font-weight: 400; color: var(--brun); margin-bottom: 1rem; display: flex; align-items: center; justify-content: space-between; }
+    /* ── Stats ───────────────────────────────────────────── */
+    .dash-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .dash-stat {
+      background: #fff;
+      border: 1px solid var(--ivory-mid);
+      border-radius: 8px;
+      padding: 1.5rem 1.25rem;
+      text-align: center;
+    }
+    .dash-stat-value {
+      font-family: var(--ff-title);
+      font-size: 2.4rem;
+      color: var(--sage);
+      font-weight: 300;
+      line-height: 1;
+    }
+    .dash-stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--brun-light);
+      margin-top: 8px;
+    }
 
+    /* ── Section title ───────────────────────────────────── */
+    .dash-section-title {
+      font-family: var(--ff-title);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--brun);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--ivory-mid);
+      padding-bottom: 0.75rem;
+    }
+
+    /* ── Agendements ─────────────────────────────────────── */
     .agendement-list { display: flex; flex-direction: column; gap: 10px; }
-    .agendement-card { background: #fff; border: 1px solid var(--ivory-mid); border-radius: 10px; padding: 1.25rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; transition: border-color 0.3s; }
+    .agendement-card {
+      background: #fff;
+      border: 1px solid var(--ivory-mid);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      transition: border-color 0.3s;
+    }
     .agendement-card:hover { border-color: var(--sage-light); }
     .agendement-info { flex: 1; }
-    .agendement-soin { font-size: 15px; font-weight: 500; color: var(--brun); margin-bottom: 4px; }
-    .agendement-meta { font-size: 13px; color: var(--brun-light); }
+    .agendement-soin {
+      font-family: var(--ff-title);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--brun);
+      margin-bottom: 3px;
+    }
+    .agendement-meta { font-size: 12px; color: var(--brun-light); letter-spacing: 0.3px; }
     .agendement-actions { display: flex; align-items: center; gap: 10px; }
-    .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; }
+
+    /* ── Badges ──────────────────────────────────────────── */
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
     .badge-confirme { background: #e8f3ea; color: var(--sage-dark); }
-    .badge-annule { background: #fdf0f0; color: #b94040; }
-    .badge-attente { background: #fdf7ed; color: var(--mocha-dark); }
-    .btn-annuler { background: none; border: 1px solid var(--ivory-mid); border-radius: 4px; padding: 6px 12px; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--brun-light); transition: all 0.3s; cursor: pointer; }
+    .badge-annule   { background: #fdf0f0; color: #b94040; }
+    .badge-attente  { background: #fdf7ed; color: var(--mocha-dark); }
+
+    .btn-annuler {
+      background: none;
+      border: 1px solid var(--ivory-mid);
+      border-radius: 3px;
+      padding: 5px 12px;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--brun-light);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
     .btn-annuler:hover { border-color: #b94040; color: #b94040; }
 
-    .empty-state { text-align: center; padding: 3rem 2rem; background: #fff; border: 1px solid var(--ivory-mid); border-radius: 10px; }
-    .empty-state p { color: var(--brun-light); font-size: 14px; margin-bottom: 1.5rem; }
-
-    .loading { text-align: center; padding: 2rem; color: var(--brun-light); font-size: 14px; }
+    /* ── Empty / Loading ─────────────────────────────────── */
+    .empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: #fff;
+      border: 1px solid var(--ivory-mid);
+      border-radius: 8px;
+    }
+    .empty-state p {
+      font-family: var(--ff-body);
+      color: var(--brun-light);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+    .loading {
+      text-align: center;
+      padding: 2rem;
+      font-family: var(--ff-body);
+      color: var(--brun-light);
+      font-size: 0.9rem;
+    }
 
     @media (max-width: 600px) {
+      .dash-nav { padding: 0 1rem; }
       .agendement-card { flex-direction: column; align-items: flex-start; }
       .agendement-actions { width: 100%; justify-content: space-between; }
     }
@@ -69,8 +194,8 @@
   <main class="dash-main">
 
     <div class="dash-header">
+      <div class="dash-header-label">Massage & Bien-être · Valence</div>
       <h1 id="dash-title">Mon espace</h1>
-      <p>Gérez vos rendez-vous SereniSpa</p>
     </div>
 
     <!-- STATS -->

@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 const Agendement = require('../models/Agendement');
 const validerToken = require('../middlewares/authentification');
 
@@ -8,26 +9,35 @@ router.post('/', validerToken, async (req, res) => {
   try {
     const { massagisteId, serviceId, date, heure } = req.body;
 
+    // Convertir strings em ObjectId
+    let massagisteIdObj, serviceIdObj;
+    try {
+      massagisteIdObj = new mongoose.Types.ObjectId(massagisteId);
+      serviceIdObj = new mongoose.Types.ObjectId(serviceId);
+    } catch (err) {
+      return res.status(400).json({ erreur: 'IDs invalides' });
+    }
+
     // Valider si le slot est déjà occupé
     const agendementExiste = await Agendement.findOne({
-      massagisteId,
+      massagisteId: massagisteIdObj,
       date,
       heure,
-      statut: { $ne: 'annulé' } // Ignorer les agendements annulés
+      statut: { $ne: 'annulé' }
     });
 
     if (agendementExiste) {
-      return res.status(409).json({ erreur: 'Créneauhoraire déjà occupé' });
+      return res.status(409).json({ erreur: 'Créneau horaire déjà occupé' });
     }
 
     // Créer l'agendement
     const nouvelAgendement = new Agendement({
       clientId: req.clientId,
-      massagisteId,
-      serviceId,
+      massagisteId: massagisteIdObj,
+      serviceId: serviceIdObj,
       date,
       heure,
-      heureFin: calculerHeureFin(heure), // Ajouter 55 minutes
+      heureFin: calculerHeureFin(heure),
       statut: 'confirmé'
     });
 
@@ -45,7 +55,7 @@ router.post('/', validerToken, async (req, res) => {
 // Fonction auxiliaire pour calculer l'heure de fin
 function calculerHeureFin(heure) {
   const [h, m] = heure.split(':').map(Number);
-  const totalMinutes = h * 60 + m + 55; // Ajouter 55 minutes
+  const totalMinutes = h * 60 + m + 55;
   const nouvelleHeure = Math.floor(totalMinutes / 60) % 24;
   const nouvelleMinute = totalMinutes % 60;
   return `${String(nouvelleHeure).padStart(2, '0')}:${String(nouvelleMinute).padStart(2, '0')}`;

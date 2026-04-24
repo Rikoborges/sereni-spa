@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap');
 
 :root {
   --ivory:      #F2EDE6;
@@ -12,8 +12,8 @@
   --brun:       #1A1210;
   --brun-mid:   #3D2E22;
   --brun-light: #6B5646;
-  --ff-title: 'Cormorant Garamond', Georgia, serif;
-  --ff-body:  'DM Sans', sans-serif;
+  --ff-title: 'Poppins', sans-serif;
+  --ff-body:  'Inter', sans-serif;
   --transition: 0.3s ease;
 }
 
@@ -24,10 +24,10 @@ img { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
 button { cursor: pointer; font-family: var(--ff-body); }
 
-.label-sm { font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; font-weight: 500; color: var(--sage); display: block; }
-.title-xl { font-family: var(--ff-title); font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 400; line-height: 1.1; }
-.title-lg { font-family: var(--ff-title); font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 400; line-height: 1.2; }
-.title-md { font-family: var(--ff-title); font-size: 1.6rem; font-weight: 400; }
+.label-sm { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; color: var(--sage); display: block; }
+.title-xl { font-family: var(--ff-title); font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 700; line-height: 1.15; }
+.title-lg { font-family: var(--ff-title); font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 600; line-height: 1.25; }
+.title-md { font-family: var(--ff-title); font-size: 1.4rem; font-weight: 600; }
 
 /* BUTTONS */
 .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; border-radius: 3px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; border: none; transition: var(--transition); }
@@ -74,7 +74,7 @@ button { cursor: pointer; font-family: var(--ff-body); }
 .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 
 /* SECTION */
-.section { padding: clamp(3rem, 8vw, 5rem) 2rem; }
+.section { padding: clamp(3rem, 8vw, 5rem) 2rem; scroll-margin-top: 64px; }
 .section-header { text-align: center; margin-bottom: 3rem; }
 .section-header .title-lg { margin-top: 0.5rem; color: var(--brun); }
 
@@ -157,12 +157,30 @@ button { cursor: pointer; font-family: var(--ff-body); }
 .about-text { max-width: 560px; margin: 0 auto; text-align: center; color: var(--brun-mid); font-size: 15px; line-height: 1.8; }
 
 /* MASSAGISTES */
-.massagistes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; max-width: 760px; margin: 0 auto; }
-.massagiste-card { background: #fff; border: 1px solid var(--ivory-mid); border-radius: 10px; padding: 1.75rem 1.5rem; text-align: center; transition: var(--transition); }
+.massagistes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; max-width: 800px; margin: 0 auto; }
+.massagiste-card { background: #fff; border: 1px solid var(--ivory-mid); border-radius: 10px; overflow: hidden; text-align: center; transition: var(--transition); }
 .massagiste-card:hover { border-color: var(--sage-light); transform: translateY(-2px); }
-.massagiste-avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--sage-light); display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-family: var(--ff-title); font-size: 1.4rem; color: var(--sage-dark); }
-.massagiste-name { font-family: var(--ff-title); font-size: 1.2rem; margin-bottom: 0.25rem; }
+.massagiste-photo { width: 100%; height: 220px; object-fit: cover; display: block; background: var(--ivory-mid); }
+.massagiste-photo-placeholder { width: 100%; height: 220px; background: linear-gradient(135deg, var(--sage-light) 0%, var(--ivory-mid) 100%); display: flex; align-items: center; justify-content: center; font-family: var(--ff-title); font-size: 2.5rem; font-weight: 600; color: var(--sage-dark); }
+.massagiste-card-body { padding: 1.25rem 1.5rem; }
+.massagiste-name { font-family: var(--ff-title); font-size: 1.1rem; font-weight: 600; margin-bottom: 0.25rem; }
 .massagiste-spec { font-size: 12px; color: var(--brun-mid); letter-spacing: 0.5px; text-transform: uppercase; font-weight: 500; }
+
+/* GALLERY */
+.gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; max-width: 860px; margin: 0 auto; border-radius: 8px; overflow: hidden; }
+.gallery-item { aspect-ratio: 4/3; overflow: hidden; background: var(--ivory-mid); position: relative; }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; display: block; }
+.gallery-item:hover img { transform: scale(1.05); }
+.gallery-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 2rem; background: linear-gradient(135deg, var(--ivory-mid), var(--sage-light)); }
+@media (max-width: 600px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* RGPD BANNER */
+.rgpd-banner { position: fixed; bottom: 0; left: 0; right: 0; background: var(--brun); color: var(--ivory); padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; z-index: 999; flex-wrap: wrap; font-size: 13px; line-height: 1.5; box-shadow: 0 -4px 20px rgba(0,0,0,0.15); }
+.rgpd-banner p { flex: 1; min-width: 200px; color: rgba(242,237,230,0.85); }
+.rgpd-banner p a { color: var(--sage-light); text-decoration: underline; }
+.rgpd-banner-actions { display: flex; gap: 0.75rem; flex-shrink: 0; }
+.rgpd-banner.hidden { display: none; }
+@media (max-width: 600px) { .rgpd-banner { padding: 1rem; } .rgpd-banner-actions { width: 100%; } }
 
 /* CONFIANCE */
 .confiance-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; max-width: 680px; margin: 0 auto; }

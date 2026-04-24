@@ -10,7 +10,13 @@ const app = express();
 // Middlewares de sécurité
 app.use(helmet());
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://127.0.0.1:3000', 'http://localhost:5500', 'http://127.0.0.1:5500'],
+  origin: [
+    'http://localhost:3000', 'http://127.0.0.1:3000',
+    'http://localhost:5500', 'http://127.0.0.1:5500',
+    'http://localhost:8080', 'http://127.0.0.1:8080',
+    'http://localhost:8000', 'http://127.0.0.1:8000',
+    'http://localhost:4000', 'http://127.0.0.1:4000',
+  ],
   credentials: true
 }));
 

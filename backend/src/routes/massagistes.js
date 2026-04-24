@@ -60,7 +60,7 @@ router.get('/:id/slots-disponibles', async (req, res) => {
     }
 
     // Générer les slots de 55 minutes
-    const slots = genererSlots(
+    const slots = await genererSlots(
       massagiste.horaireDébut,
       massagiste.horaireFin,
       req.params.id,
