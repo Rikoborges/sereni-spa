@@ -48,7 +48,7 @@ function afficherStats(agendements) {
   const total = agendements.length;
   const confirmes = agendements.filter(a => a.statut === 'confirmé').length;
   const prochains = agendements
-    .filter(a => a.statut !== 'annulé' && new Date(a.date) >= new Date())
+    .filter(a => a.statut !== 'annulé' && new Date(a.date + 'T12:00') >= new Date())
     .sort((a, b) => new Date(a.date) - new Date(b.date));
 
   document.getElementById('stat-total').textContent = total;
@@ -77,7 +77,7 @@ function afficherAgendements(agendements) {
       const praticien = a.massagisteId?.nom || 'Praticien';
       const dateStr = new Date(a.date + 'T12:00').toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
       const badgeClass = a.statut === 'confirmé' ? 'badge-confirme' : a.statut === 'annulé' ? 'badge-annule' : 'badge-attente';
-      const peutAnnuler = a.statut !== 'annulé' && new Date(a.date) >= new Date();
+      const peutAnnuler = a.statut !== 'annulé' && new Date(a.date + 'T12:00') >= new Date();
 
       return `
         <div class="agendement-card">
@@ -140,6 +140,14 @@ const modalBooking = document.getElementById('modal-booking');
 
 async function openBooking() {
   Object.assign(booking, { massagisteId: null, massagisteNom: null, serviceId: null, serviceNom: null, servicePrix: null, date: null, heure: null });
+
+  // Pular fim de semana na data inicial
+  const hojeInit = new Date();
+  while (hojeInit.getDay() === 0 || hojeInit.getDay() === 6) {
+    hojeInit.setDate(hojeInit.getDate() + 1);
+  }
+  dateInput.value = hojeInit.toISOString().split('T')[0];
+
   modalBooking.classList.add('active');
   await chargerEtape1();
   goToStep(1);
@@ -166,7 +174,7 @@ function goToStep(n) {
   document.getElementById('booking-title').textContent = titles[n];
 }
 
-// Étape 1 — Massagistes (chargés depuis l'API)
+// Étape 1 — Massagistes
 async function chargerEtape1() {
   const step = document.getElementById('step-1');
   step.innerHTML = '<div style="padding:1.5rem;text-align:center;color:var(--brun-light);font-size:14px;">Chargement...</div>';
@@ -208,7 +216,7 @@ async function chargerEtape1() {
   }
 }
 
-// Étape 2 — Services (chargés depuis l'API)
+// Étape 2 — Services
 async function chargerEtape2() {
   const step = document.getElementById('step-2');
   step.innerHTML = '<div style="padding:1.5rem;text-align:center;color:var(--brun-light);font-size:14px;">Chargement...</div>';
@@ -262,35 +270,28 @@ async function chargerEtape2() {
 
 // Étape 3 — Date + créneaux
 const dateInput = document.getElementById('booking-date');
-const today = new Date().toISOString().split('T')[0];
+
+// Data inicial — pular fim de semana
+const hojeInicial = new Date();
+while (hojeInicial.getDay() === 0 || hojeInicial.getDay() === 6) {
+  hojeInicial.setDate(hojeInicial.getDate() + 1);
+}
+const today = hojeInicial.toISOString().split('T')[0];
 dateInput.min = today;
 dateInput.value = today;
-dateInput.addEventListener('change', chargerCreneaux);
 
-document.getElementById('step3-back').addEventListener('click', async () => {
-  await chargerEtape2();
-  goToStep(2);
-});
-document.getElementById('step3-next').addEventListener('click', () => {
-  document.getElementById('booking-summary').innerHTML = `
-    <div class="booking-summary-row"><span>Praticien</span><span>${booking.massagisteNom}</span></div>
-    <div class="booking-summary-row"><span>Soin</span><span>${booking.serviceNom}</span></div>
-    <div class="booking-summary-row"><span>Date</span><span>${new Date(booking.date + 'T12:00').toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' })}</span></div>
-    <div class="booking-summary-row"><span>Heure</span><span>${booking.heure}</span></div>
-    <div class="booking-summary-row" style="border-top:1px solid var(--ivory-mid);margin-top:8px;padding-top:8px;"><span>Total</span><span style="color:var(--mocha);font-family:var(--ff-title);font-size:1.1rem;">${booking.servicePrix} €</span></div>
-  `;
-  goToStep(4);
+// Ao mudar a data — pular fim de semana
+dateInput.addEventListener('change', () => {
+  const d = new Date(dateInput.value + 'T12:00');
+  while (d.getDay() === 0 || d.getDay() === 6) {
+    d.setDate(d.getDate() + 1);
+    dateInput.value = d.toISOString().split('T')[0];
+  }
+  chargerCreneaux();
 });
 
 async function chargerCreneaux() {
   if (!booking.massagisteId) return;
-
-  // Auto-avancer si dimanche (jour 0)
-  const d = new Date(dateInput.value + 'T12:00');
-  if (d.getDay() === 0) {
-    d.setDate(d.getDate() + 1);
-    dateInput.value = d.toISOString().split('T')[0];
-  }
 
   const date = dateInput.value;
   if (!date) return;
@@ -314,6 +315,9 @@ async function chargerCreneaux() {
       const data = await res.json();
       loadingEl.textContent = data.erreur || 'Indisponible ce jour — choisissez une autre date.';
       loadingEl.style.color = 'var(--mocha)';
+      document.getElementById('step3-next').disabled = true;
+      booking.heure = null;
+      document.getElementById('slots-container').style.display = 'none';
       return;
     }
 
@@ -346,6 +350,22 @@ function afficherCreneaux(creneaux) {
   document.getElementById('slots-loading').style.display = 'none';
   document.getElementById('slots-container').style.display = 'block';
 }
+
+document.getElementById('step3-back').addEventListener('click', async () => {
+  await chargerEtape2();
+  goToStep(2);
+});
+
+document.getElementById('step3-next').addEventListener('click', () => {
+  document.getElementById('booking-summary').innerHTML = `
+    <div class="booking-summary-row"><span>Praticien</span><span>${booking.massagisteNom}</span></div>
+    <div class="booking-summary-row"><span>Soin</span><span>${booking.serviceNom}</span></div>
+    <div class="booking-summary-row"><span>Date</span><span>${new Date(booking.date + 'T12:00').toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' })}</span></div>
+    <div class="booking-summary-row"><span>Heure</span><span>${booking.heure}</span></div>
+    <div class="booking-summary-row" style="border-top:1px solid var(--ivory-mid);margin-top:8px;padding-top:8px;"><span>Total</span><span style="color:var(--mocha);font-family:var(--ff-title);font-size:1.1rem;">${booking.servicePrix} €</span></div>
+  `;
+  goToStep(4);
+});
 
 // Étape 4 — Confirmer
 document.getElementById('step4-back').addEventListener('click', () => goToStep(3));

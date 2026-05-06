@@ -1,20 +1,22 @@
 // backend/src/server.js
-// Carregar .env PRIMEIRO
 require('dotenv').config();
 
-// Se não tiver no .env, usar valores padrão (apenas para DEV)
 if (!process.env.MONGODB_URI) {
-  process.env.MONGODB_URI = 'mongodb+srv://rico3836_db-user:!Rikko61612730@cluster1.cmqnudr.mongodb.net/sereni-spa?appName=Cluster1';
+  console.error('❌ MONGODB_URI não definido no .env');
+  process.exit(1);
 }
 
 if (!process.env.JWT_SECRET) {
-  process.env.JWT_SECRET = 'seu_segredo_super_secreto_minimo_32_caracteres_aqui_12345';
+  console.error('❌ JWT_SECRET não definido no .env');
+  process.exit(1);
 }
 
 process.env.PORT = process.env.PORT || 5000;
 
 const app = require('./app');
 const connecterDB = require('./config/database');
+const cron = require('node-cron');
+const Agendement = require('./models/Agendement');
 
 const PORT = process.env.PORT;
 
@@ -22,7 +24,21 @@ connecterDB().then(() => {
   app.listen(PORT, () => {
     console.log(`✅ Serveur lancé sur http://localhost:${PORT}`);
   });
+
+  // Limpeza automática — todo dia às 2h da manhã
+  cron.schedule('0 2 * * *', async () => {
+    const il6mois = new Date();
+    il6mois.setMonth(il6mois.getMonth() - 6);
+
+    const result = await Agendement.deleteMany({
+      statut: 'annulé',
+      date: { $lt: il6mois.toISOString().split('T')[0] }
+    });
+
+    console.log(`🧹 ${result.deletedCount} agendements annulés supprimés`);
+  });
+
 }).catch(erro => {
-  console.error(' Erreur:', erro.message);
+  console.error('❌ Erreur:', erro.message);
   process.exit(1);
 });

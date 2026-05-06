@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const Agendement = require('../models/Agendement');
+const Service = require('../models/service');
 const validerToken = require('../middlewares/authentification');
 
 // Créer un nouvel agendement (client authentifié)
@@ -30,14 +31,16 @@ router.post('/', validerToken, async (req, res) => {
       return res.status(409).json({ erreur: 'Créneau horaire déjà occupé' });
     }
 
-    // Créer l'agendement
+    const service = await Service.findById(serviceIdObj);
+    const dureeMinutes = service?.dureeMinutes || 55;
+
     const nouvelAgendement = new Agendement({
       clientId: req.clientId,
       massagisteId: massagisteIdObj,
       serviceId: serviceIdObj,
       date,
       heure,
-      heureFin: calculerHeureFin(heure),
+      heureFin: calculerHeureFin(heure, dureeMinutes),
       statut: 'confirmé'
     });
 
@@ -52,10 +55,9 @@ router.post('/', validerToken, async (req, res) => {
   }
 });
 
-// Fonction auxiliaire pour calculer l'heure de fin
-function calculerHeureFin(heure) {
+function calculerHeureFin(heure, dureeMinutes) {
   const [h, m] = heure.split(':').map(Number);
-  const totalMinutes = h * 60 + m + 55;
+  const totalMinutes = h * 60 + m + dureeMinutes;
   const nouvelleHeure = Math.floor(totalMinutes / 60) % 24;
   const nouvelleMinute = totalMinutes % 60;
   return `${String(nouvelleHeure).padStart(2, '0')}:${String(nouvelleMinute).padStart(2, '0')}`;

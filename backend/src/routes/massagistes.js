@@ -54,10 +54,13 @@ router.get('/:id/slots-disponibles', async (req, res) => {
       5: 'vendredi',
       6: 'samedi'
     };
-    const jourActuel = joursMap[dateObj.getDay()];
-    if (!massagiste.joursOuverts.includes(jourActuel)) {
-      return res.status(400).json({ erreur: `Le spa est fermé le ${jourActuel}` });
-    }
+const jourActuel = joursMap[dateObj.getDay()];
+const jourNum = dateObj.getDay();
+
+// Bloquer samedi (6) et dimanche (0)
+if (jourNum === 0 || jourNum === 6) {
+  return res.status(400).json({ erreur: `Le spa est fermé le ${jourActuel}` });
+}
 
     // Générer les slots de 55 minutes
     const slots = await genererSlots(
@@ -73,34 +76,33 @@ router.get('/:id/slots-disponibles', async (req, res) => {
   }
 });
 
-// Fonction pour générer les slots de 55 minutes
 async function genererSlots(debut, fin, massagisteId, date) {
   const slots = [];
   const Agendement = require('../models/Agendement');
 
-  // Convertir heures en minutes
   const [hDebut, mDebut] = debut.split(':').map(Number);
   const [hFin, mFin] = fin.split(':').map(Number);
 
   let minutesActuelles = hDebut * 60 + mDebut;
   const minutesFin = hFin * 60 + mFin;
 
+  // Buscar todos os agendamentos do dia de uma só vez
+  const agendamentosDoDia = await Agendement.find({
+    massagisteId,
+    date,
+    statut: { $ne: 'annulé' }
+  }).select('heure');
+
+  const horasOcupadas = new Set(agendamentosDoDia.map(a => a.heure));
+
   while (minutesActuelles + 55 <= minutesFin) {
     const heure = String(Math.floor(minutesActuelles / 60)).padStart(2, '0');
     const minute = String(minutesActuelles % 60).padStart(2, '0');
     const heureString = `${heure}:${minute}`;
 
-    // Vérifier si le slot est occupé
-    const agendementExiste = await Agendement.findOne({
-      massagisteId,
-      date,
-      heure: heureString,
-      statut: { $ne: 'annulé' }
-    });
-
     slots.push({
       heure: heureString,
-      disponible: !agendementExiste
+      disponible: !horasOcupadas.has(heureString)
     });
 
     minutesActuelles += 55;

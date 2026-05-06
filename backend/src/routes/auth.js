@@ -9,16 +9,13 @@ router.post('/inscription', async (req, res) => {
   try {
     const { nom, email, telephone, motDePasse } = req.body;
 
-    // Validar se cliente já existe
     const clientExiste = await Client.findOne({ email });
     if (clientExiste) {
       return res.status(400).json({ erreur: 'Email déjà utilisé' });
     }
 
-    // 
     const motDePasseHash = await bcrypt.hash(motDePasse, 10);
 
-    // Criar novo cliente
     const novoClient = new Client({
       nom,
       email,
@@ -28,7 +25,13 @@ router.post('/inscription', async (req, res) => {
 
     await novoClient.save();
 
-    res.status(201).json({ message: 'Client inscrit avec succès!', clientId: novoClient._id });
+    const token = jwt.sign(
+      { clientId: novoClient._id, role: novoClient.role },
+      process.env.JWT_SECRET,
+      { expiresIn: '24h' }
+    );
+
+    res.status(201).json({ message: 'Client inscrit avec succès!', token, clientId: novoClient._id, role: novoClient.role, nom: novoClient.nom });
   } catch (erro) {
     res.status(500).json({ erreur: erro.message });
   }
@@ -51,18 +54,13 @@ router.post('/connexion', async (req, res) => {
       return res.status(401).json({ erreur: 'Email ou mot de passe incorrect' });
     }
 
-    // DEBUG
-console.log('JWT_SECRET:', process.env.JWT_SECRET);
-console.log('process.env:', Object.keys(process.env));
-
-    // Criar JWT token
     const token = jwt.sign(
       { clientId: client._id, role: client.role },
       process.env.JWT_SECRET,
       { expiresIn: '24h' }
     );
 
-    res.json({ message: 'Connexion réussie!', token, clientId: client._id });
+    res.json({ message: 'Connexion réussie!', token, clientId: client._id, role: client.role, nom: client.nom });
   } catch (erro) {
     res.status(500).json({ erreur: erro.message });
   }

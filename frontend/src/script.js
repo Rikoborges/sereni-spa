@@ -95,14 +95,14 @@ document.getElementById('btn-login').addEventListener('click', async () => {
     localStorage.setItem('token', data.token);
     localStorage.setItem('role', data.role || 'client');
     localStorage.setItem('userName', data.nom || email);
-    
+
     closeAuth();
-    
-    if (data.role === 'admin') { 
-      window.location.href = 'admin.html'; 
-      return; 
+
+    if (data.role === 'admin') {
+      window.location.href = 'admin.html';
+      return;
     }
-    
+
     openBooking();
   } catch (err) { 
     showError('login-error', err.message); 
@@ -122,9 +122,9 @@ document.getElementById('btn-register').addEventListener('click', async () => {
     return; 
   }
   
-  if (motDePasse.length < 6) { 
-    showError('register-error', 'Mot de passe trop court (min. 6 caractères).'); 
-    return; 
+  if (motDePasse.length < 8) {
+    showError('register-error', 'Mot de passe trop court (min. 8 caractères).');
+    return;
   }
   
   try {
@@ -138,8 +138,8 @@ document.getElementById('btn-register').addEventListener('click', async () => {
     if (!res.ok) throw new Error(data.erreur || 'Erreur lors de la création du compte');
     
     localStorage.setItem('token', data.token);
-    localStorage.setItem('role', 'client');
-    localStorage.setItem('userName', nom);
+    localStorage.setItem('role', data.role || 'client');
+    localStorage.setItem('userName', data.nom || nom);
     
     closeAuth();
     openBooking();
@@ -153,6 +153,14 @@ const modalBooking = document.getElementById('modal-booking');
 
 async function openBooking() {
   Object.assign(booking, { massagisteId: null, massagisteNom: null, serviceId: null, serviceNom: null, servicePrix: null, date: null, heure: null });
+
+  // Pular fim de semana na data inicial
+  const hojeInit = new Date();
+  while (hojeInit.getDay() === 0 || hojeInit.getDay() === 6) {
+    hojeInit.setDate(hojeInit.getDate() + 1);
+  }
+  dateInput.value = hojeInit.toISOString().split('T')[0];
+
   modalBooking.classList.add('active');
   await chargerEtape1();
   goToStep(1);
@@ -292,21 +300,28 @@ async function chargerEtape2() {
 
 // ÉTAPE 3 — DATE + CRÉNEAUX
 const dateInput = document.getElementById('booking-date');
-const today = new Date().toISOString().split('T')[0];
+
+// Data inicial — pular fim de semana
+const hojeInicial = new Date();
+while (hojeInicial.getDay() === 0 || hojeInicial.getDay() === 6) {
+  hojeInicial.setDate(hojeInicial.getDate() + 1);
+}
+const today = hojeInicial.toISOString().split('T')[0];
 dateInput.min = today;
 dateInput.value = today;
 
-dateInput.addEventListener('change', chargerCreneaux);
-
-async function chargerCreneaux() {
-  if (!booking.massagisteId) return;
-
-  // Auto-avancer si dimanche (jour 0)
+// Ao mudar a data — pular fim de semana
+dateInput.addEventListener('change', () => {
   const d = new Date(dateInput.value + 'T12:00');
-  if (d.getDay() === 0) {
+  while (d.getDay() === 0 || d.getDay() === 6) {
     d.setDate(d.getDate() + 1);
     dateInput.value = d.toISOString().split('T')[0];
   }
+  chargerCreneaux();
+});
+
+async function chargerCreneaux() {
+  if (!booking.massagisteId) return;
 
   const date = dateInput.value;
   if (!date) return;
@@ -327,11 +342,14 @@ async function chargerCreneaux() {
     });
 
     if (!res.ok) {
-      const data = await res.json();
-      loadingEl.textContent = data.erreur || 'Indisponible ce jour — choisissez une autre date.';
-      loadingEl.style.color = 'var(--mocha)';
-      return;
-    }
+  const data = await res.json();
+  loadingEl.textContent = data.erreur || 'Indisponible ce jour — choisissez une autre date.';
+  loadingEl.style.color = 'var(--mocha)';
+  document.getElementById('step3-next').disabled = true;
+  booking.heure = null;
+  document.getElementById('slots-container').style.display = 'none';
+  return;
+}
 
     const creneaux = await res.json();
     afficherCreneaux(creneaux);
@@ -369,6 +387,7 @@ document.getElementById('step3-back').addEventListener('click', async () => {
   await chargerEtape2();
   goToStep(2);
 });
+
 document.getElementById('step3-next').addEventListener('click', () => {
   document.getElementById('booking-summary').innerHTML = `
     <div class="booking-summary-row"><span>Praticien</span><span>${booking.massagisteNom}</span></div>
