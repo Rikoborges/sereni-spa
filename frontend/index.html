@@ -54,7 +54,7 @@
 <body>
 
   <!-- NAVBAR -->
-  <nav class="navbar">
+  <nav class="navbar" role="navigation" aria-label="Navigation principale">
     <div class="navbar-logo">SERENI<span>SPA</span></div>
     <ul class="navbar-links">
       <li><a href="#soins">Nos soins</a></li>
@@ -66,26 +66,26 @@
     <div class="navbar-actions">
       <button class="btn btn-primary" id="btn-reserver">Réserver</button>
     </div>
-    <button class="burger" id="burger" aria-label="Menu">
+    <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-menu">
       <span></span><span></span><span></span>
     </button>
   </nav>
 
   <!-- MOBILE MENU -->
-  <div class="mobile-menu" id="mobile-menu">
-    <a href="#soins">Nos soins</a>
-    <a href="#equipe">L'équipe</a>
-    <a href="#galerie">Galerie</a>
-    <a href="#faq">FAQ</a>
-    <a href="#contact">Contact</a>
+  <div class="mobile-menu" id="mobile-menu" role="menu">
+    <a href="#soins" role="menuitem">Nos soins</a>
+    <a href="#equipe" role="menuitem">L'équipe</a>
+    <a href="#galerie" role="menuitem">Galerie</a>
+    <a href="#faq" role="menuitem">FAQ</a>
+    <a href="#contact" role="menuitem">Contact</a>
     <button class="btn btn-primary" id="btn-reserver-mobile">Réserver</button>
   </div>
 
   <!-- HERO -->
-  <section class="hero">
+  <section class="hero" aria-labelledby="hero-heading">
     <div class="hero-inner">
       <span class="label-sm">Massage & Bien-être · Valence</span>
-      <h1 class="title-xl hero-title">
+      <h1 class="title-xl hero-title" id="hero-heading">
         L'art du soin,<br>pour votre <em>équilibre</em>
       </h1>
       <p class="hero-sub">Massages thérapeutiques · Soins personnalisés · Praticiens certifiés</p>
@@ -97,7 +97,7 @@
   </section>
 
   <!-- CONFIANCE -->
-  <section class="section" style="background:#fff; padding: 2.5rem 2rem;">
+  <section class="section" aria-label="Chiffres clés" style="background:#fff; padding: 2.5rem 2rem;">
     <div class="confiance-grid">
       <div class="confiance-item anim-up">
         <div class="confiance-number">3</div>
@@ -119,14 +119,14 @@
   </section>
 
   <!-- SERVICES -->
-  <section class="section" id="soins">
+  <section class="section" id="soins" aria-labelledby="soins-heading">
     <div class="section-header anim-up">
       <span class="label-sm">Nos soins</span>
-      <h2 class="title-lg">Choisissez votre moment</h2>
+      <h2 class="title-lg" id="soins-heading">Choisissez votre moment</h2>
     </div>
     <div class="services-grid">
       <div class="service-card anim-up" style="transition-delay:0.1s">
-        <div class="service-icon">🌿</div>
+        <div class="service-icon" aria-hidden="true">🌿</div>
         <div class="service-name">Massage suédois</div>
         <p class="service-desc">Relaxation profonde du corps entier. Idéal pour libérer les tensions musculaires et retrouver l'équilibre.</p>
         <div class="service-meta">
@@ -135,7 +135,7 @@
         </div>
       </div>
       <div class="service-card anim-up" style="transition-delay:0.2s">
-        <div class="service-icon">🪨</div>
+        <div class="service-icon" aria-hidden="true">🪨</div>
         <div class="service-name">Massage aux pierres</div>
         <p class="service-desc">Chaleur et équilibre. Notre soin signature combine pierres volcaniques et huiles essentielles biologiques.</p>
         <div class="service-meta">
@@ -144,7 +144,7 @@
         </div>
       </div>
       <div class="service-card anim-up" style="transition-delay:0.3s">
-        <div class="service-icon">✨</div>
+        <div class="service-icon" aria-hidden="true">✨</div>
         <div class="service-name">Soin visage</div>
         <p class="service-desc">Éclat naturel et hydratation profonde. Protocole personnalisé avec des actifs certifiés biologiques.</p>
         <div class="service-meta">
@@ -156,31 +156,28 @@
   </section>
 
   <!-- EQUIPE -->
-  <section class="section" id="equipe" style="background:#fff;">
+  <section class="section" id="equipe" aria-labelledby="equipe-heading" style="background:#fff;">
     <div class="section-header anim-up">
       <span class="label-sm">L'équipe</span>
-      <h2 class="title-lg">Vos praticiens</h2>
+      <h2 class="title-lg" id="equipe-heading">Vos praticiens</h2>
     </div>
     <div class="massagistes-grid" id="massagistes-container">
       <div class="massagiste-card anim-up" style="transition-delay:0.1s">
-        <!-- Substituir src por foto real: assets/equipe/marie-laurent.jpg -->
-        <div class="massagiste-photo-placeholder">ML</div>
+        <div class="massagiste-photo-placeholder" aria-hidden="true">ML</div>
         <div class="massagiste-card-body">
           <div class="massagiste-name">Marie Laurent</div>
           <div class="massagiste-spec">Massage suédois · Pierres chaudes</div>
         </div>
       </div>
       <div class="massagiste-card anim-up" style="transition-delay:0.2s">
-        <!-- Substituir src por foto real: assets/equipe/sophie-bernard.jpg -->
-        <div class="massagiste-photo-placeholder">SB</div>
+        <div class="massagiste-photo-placeholder" aria-hidden="true">SB</div>
         <div class="massagiste-card-body">
           <div class="massagiste-name">Sophie Bernard</div>
           <div class="massagiste-spec">Soins visage · Relaxation</div>
         </div>
       </div>
       <div class="massagiste-card anim-up" style="transition-delay:0.3s">
-        <!-- Substituir src por foto real: assets/equipe/claire-martin.jpg -->
-        <div class="massagiste-photo-placeholder">CM</div>
+        <div class="massagiste-photo-placeholder" aria-hidden="true">CM</div>
         <div class="massagiste-card-body">
           <div class="massagiste-name">Claire Martin</div>
           <div class="massagiste-spec">Massage aux pierres · Ayurvéda</div>
@@ -190,94 +187,89 @@
   </section>
 
   <!-- GALERIE -->
-  <section class="section" id="galerie" style="background:#fff;">
+  <section class="section" id="galerie" aria-labelledby="galerie-heading" style="background:#fff;">
     <div class="section-header anim-up">
       <span class="label-sm">Ambiance</span>
-      <h2 class="title-lg">L'espace SereniSpa</h2>
+      <h2 class="title-lg" id="galerie-heading">L'espace SereniSpa</h2>
     </div>
-    <div class="gallery-grid">
-  <div class="gallery-item anim-up">
-   <img src="src/assets/photo-1.webp" alt="Jardin de Serenispa" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
-  </div>
-  
-  <div class="gallery-item anim-up" style="transition-delay:0.1s">
-   <img src="src/assets/photo-2.webp" alt="Textur ceramique" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
-  </div>
-  
-  <div class="gallery-item anim-up" style="transition-delay:0.2s">
-   <img src="src/assets/photo-3.webp" alt="Ilumination en serenispa" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
-  </div>
-  
-  <div class="gallery-item anim-up" style="transition-delay:0.15s">
-<img src="src/assets/photo-4.webp" alt="Le espace medité" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
-  </div>
-  
-  <div class="gallery-item anim-up" style="transition-delay:0.25s">
-  <img src="src/assets/photo-5.webp" alt="Jadin de serenispa" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
-  </div>
-  
-  <div class="gallery-item anim-up" style="transition-delay:0.3s">
-    <img src="src/assets/photo-6.webp" alt="Descrição da imagem 6" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
-  </div>
-</div>
+    <div class="gallery-grid" role="list" aria-label="Galerie photos SereniSpa">
+      <div class="gallery-item anim-up" role="listitem">
+        <img src="src/assets/photo-1.webp" alt="Le jardin de SereniSpa" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="gallery-item anim-up" style="transition-delay:0.1s" role="listitem">
+        <img src="src/assets/photo-2.webp" alt="Texture céramique de l'espace bien-être" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="gallery-item anim-up" style="transition-delay:0.2s" role="listitem">
+        <img src="src/assets/photo-3.webp" alt="Éclairage tamisé de la salle de soin" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="gallery-item anim-up" style="transition-delay:0.15s" role="listitem">
+        <img src="src/assets/photo-4.webp" alt="Espace de méditation SereniSpa" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="gallery-item anim-up" style="transition-delay:0.25s" role="listitem">
+        <img src="src/assets/photo-5.webp" alt="Jardin extérieur SereniSpa" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="gallery-item anim-up" style="transition-delay:0.3s" role="listitem">
+        <img src="src/assets/photo-6.webp" alt="Ambiance intérieure SereniSpa" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+    </div>
   </section>
 
   <!-- STRIP CTA -->
-  <section class="strip-cta">
+  <section class="strip-cta" aria-label="Appel à l'action">
     <h2 class="title-md"><em>Vous y pensez depuis un moment.</em><br>C'est le signe.</h2>
     <p>Votre prochain soin est à quelques clics. Sans attente, sans téléphone.</p>
     <button class="btn btn-outline" id="btn-strip-reserver">Réserver maintenant</button>
   </section>
 
   <!-- FAQ -->
-  <section class="section" id="faq">
+  <section class="section" id="faq" aria-labelledby="faq-heading">
     <div class="section-header anim-up">
       <span class="label-sm">Questions fréquentes</span>
-      <h2 class="title-lg">Tout ce que vous voulez savoir</h2>
+      <h2 class="title-lg" id="faq-heading">Tout ce que vous voulez savoir</h2>
     </div>
     <div class="faq-list anim-up">
       <div class="faq-item">
-        <button class="faq-question">
+        <button class="faq-question" aria-expanded="false">
           Combien coûte un massage bien-être à Valence ?
-          <span class="faq-icon">+</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
         </button>
-        <div class="faq-answer">
+        <div class="faq-answer" role="region">
           <p>Nos soins sont proposés à partir de 65 € pour une séance de 55 minutes. Le tarif moyen en France est d'environ 1 € la minute — nous sommes dans cette fourchette avec des praticiens certifiés et des produits biologiques inclus.</p>
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-question">
+        <button class="faq-question" aria-expanded="false">
           Comment réserver un massage en ligne ?
-          <span class="faq-icon">+</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
         </button>
-        <div class="faq-answer">
+        <div class="faq-answer" role="region">
           <p>Créez votre espace client en 30 secondes, choisissez votre massagiste, votre soin et votre créneau disponible. La confirmation est immédiate — sans téléphone, sans attente.</p>
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-question">
+        <button class="faq-question" aria-expanded="false">
           Faut-il se déshabiller pour un massage ?
-          <span class="faq-icon">+</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
         </button>
-        <div class="faq-answer">
+        <div class="faq-answer" role="region">
           <p>La plupart de nos soins se pratiquent en sous-vêtements. Votre praticien vous guidera avant la séance et respecte toujours votre confort et votre intimité.</p>
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-question">
+        <button class="faq-question" aria-expanded="false">
           Le massage est-il remboursé par ma mutuelle ?
-          <span class="faq-icon">+</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
         </button>
-        <div class="faq-answer">
+        <div class="faq-answer" role="region">
           <p>Certaines mutuelles commencent à rembourser les séances de massage bien-être, souvent sur prescription du médecin. Renseignez-vous auprès de votre mutuelle — nous vous fournissons un justificatif de séance.</p>
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-question">
+        <button class="faq-question" aria-expanded="false">
           Puis-je annuler ou reporter mon rendez-vous ?
-          <span class="faq-icon">+</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
         </button>
-        <div class="faq-answer">
+        <div class="faq-answer" role="region">
           <p>Oui. Depuis votre espace client, vous pouvez annuler votre agendement à tout moment. Nous vous demandons de le faire au moins 24h à l'avance par respect pour votre praticien.</p>
         </div>
       </div>
@@ -288,40 +280,40 @@
   <footer class="footer" id="contact">
     <div class="footer-logo">SERENI<span>SPA</span></div>
     <p class="footer-sub">
-  Valence, France · 
-  <a href="mailto:contact@serenispa.fr">contact@serenispa.fr</a> · 
-  <a href="tel:+33475000000">+33 4 75 XX XX XX</a>
-</p>
-    <div class="footer-links">
+      Valence, France ·
+      <a href="mailto:contact@serenispa.fr">contact@serenispa.fr</a> ·
+      <a href="tel:+33475000000">+33 4 75 XX XX XX</a>
+    </p>
+    <nav class="footer-links" aria-label="Liens du site">
       <a href="#soins">Nos soins</a>
       <a href="#equipe">L'équipe</a>
       <a href="#galerie">Galerie</a>
       <a href="#faq">FAQ</a>
       <a href="dashboard.html">Mon espace</a>
-    </div>
-    <div class="footer-links" style="margin-top:-1rem;">
+    </nav>
+    <nav class="footer-links" aria-label="Liens légaux" style="margin-top:-1rem;">
       <a href="mentions-legales.html">Mentions légales</a>
       <a href="politique-confidentialite.html">Politique de confidentialité</a>
       <a href="#" id="rgpd-reopen">Cookies</a>
-    </div>
+    </nav>
     <p class="footer-copy">&copy; 2025 SereniSpa · Valence · Tous droits réservés</p>
   </footer>
 
   <!-- MODAL LOGIN / REGISTER -->
-  <div class="modal-overlay" id="modal-auth">
-    <div class="modal" role="dialog" aria-modal="true">
-      <button class="modal-close" id="modal-auth-close" aria-label="Fermer">&times;</button>
+  <div class="modal-overlay" id="modal-auth" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+    <div class="modal">
+      <button class="modal-close" id="modal-auth-close" aria-label="Fermer la fenêtre de connexion">&times;</button>
       <div class="modal-header">
         <span class="label-sm">Votre espace</span>
-        <h2 class="title-md">Bienvenue</h2>
+        <h2 class="title-md" id="auth-title">Bienvenue</h2>
         <p>Connectez-vous pour réserver votre soin</p>
       </div>
-      <div class="modal-tabs">
-        <button class="modal-tab active" data-tab="login">Connexion</button>
-        <button class="modal-tab" data-tab="register">Créer un compte</button>
+      <div class="modal-tabs" role="tablist">
+        <button class="modal-tab active" data-tab="login" role="tab" aria-selected="true" aria-controls="panel-login">Connexion</button>
+        <button class="modal-tab" data-tab="register" role="tab" aria-selected="false" aria-controls="panel-register">Créer un compte</button>
       </div>
-      <div class="form-panel active" id="panel-login">
-        <div class="alert alert-error" id="login-error"></div>
+      <div class="form-panel active" id="panel-login" role="tabpanel">
+        <div class="alert alert-error" id="login-error" role="alert"></div>
         <div class="form-group">
           <label class="form-label" for="login-email">Adresse e-mail</label>
           <input class="form-input" type="email" id="login-email" placeholder="votre@email.com" autocomplete="email">
@@ -332,23 +324,23 @@
         </div>
         <button class="btn btn-primary btn-full" id="btn-login">Se connecter</button>
       </div>
-      <div class="form-panel" id="panel-register">
-        <div class="alert alert-error" id="register-error"></div>
+      <div class="form-panel" id="panel-register" role="tabpanel">
+        <div class="alert alert-error" id="register-error" role="alert"></div>
         <div class="form-group">
           <label class="form-label" for="register-nom">Nom complet</label>
-          <input class="form-input" type="text" id="register-nom" placeholder="Marie Dupont">
+          <input class="form-input" type="text" id="register-nom" placeholder="Marie Dupont" autocomplete="name">
         </div>
         <div class="form-group">
           <label class="form-label" for="register-email">Adresse e-mail</label>
-          <input class="form-input" type="email" id="register-email" placeholder="votre@email.com">
+          <input class="form-input" type="email" id="register-email" placeholder="votre@email.com" autocomplete="email">
         </div>
         <div class="form-group">
           <label class="form-label" for="register-telephone">Téléphone</label>
-          <input class="form-input" type="tel" id="register-telephone" placeholder="+33 6 00 00 00 00">
+          <input class="form-input" type="tel" id="register-telephone" placeholder="+33 6 00 00 00 00" autocomplete="tel">
         </div>
         <div class="form-group">
           <label class="form-label" for="register-password">Mot de passe</label>
-          <input class="form-input" type="password" id="register-password" placeholder="Minimum 6 caractères">
+          <input class="form-input" type="password" id="register-password" placeholder="Minimum 8 caractères" autocomplete="new-password">
         </div>
         <button class="btn btn-primary btn-full" id="btn-register">Créer mon espace</button>
       </div>
@@ -356,51 +348,51 @@
   </div>
 
   <!-- MODAL RESERVA EM STEPS -->
-  <div class="modal-overlay" id="modal-booking">
-    <div class="modal" role="dialog" aria-modal="true" style="max-width:440px;">
-      <button class="modal-close" id="modal-booking-close" aria-label="Fermer">&times;</button>
+  <div class="modal-overlay" id="modal-booking" role="dialog" aria-modal="true" aria-labelledby="booking-title">
+    <div class="modal" style="max-width:440px;">
+      <button class="modal-close" id="modal-booking-close" aria-label="Fermer la fenêtre de réservation">&times;</button>
       <div class="modal-header">
         <span class="label-sm">Réservation</span>
         <h2 class="title-md" id="booking-title">Choisir un praticien</h2>
       </div>
-      <div class="steps-nav">
-        <div class="step-dot active" data-step="1">Praticien</div>
-        <div class="step-dot" data-step="2">Soin</div>
-        <div class="step-dot" data-step="3">Date & heure</div>
-        <div class="step-dot" data-step="4">Confirmer</div>
+      <div class="steps-nav" role="list" aria-label="Étapes de réservation">
+        <div class="step-dot active" data-step="1" role="listitem">Praticien</div>
+        <div class="step-dot" data-step="2" role="listitem">Soin</div>
+        <div class="step-dot" data-step="3" role="listitem">Date & heure</div>
+        <div class="step-dot" data-step="4" role="listitem">Confirmer</div>
       </div>
 
-      <!-- STEP 1 — MASSAGISTE -->
-      <div class="step-panel active" id="step-1">
+      <!-- STEP 1 -->
+      <div class="step-panel active" id="step-1" role="region" aria-label="Choisir un praticien">
         <div style="padding:1.5rem;text-align:center;color:var(--brun-light);font-size:14px;">Chargement...</div>
       </div>
 
-      <!-- STEP 2 — SERVICE -->
-      <div class="step-panel" id="step-2">
+      <!-- STEP 2 -->
+      <div class="step-panel" id="step-2" role="region" aria-label="Choisir un soin">
         <div style="padding:1.5rem;text-align:center;color:var(--brun-light);font-size:14px;">Chargement...</div>
       </div>
 
-      <!-- STEP 3 — DATE + SLOTS -->
-      <div class="step-panel" id="step-3">
+      <!-- STEP 3 -->
+      <div class="step-panel" id="step-3" role="region" aria-label="Choisir une date et un créneau">
         <div class="form-group">
           <label class="form-label" for="booking-date">Date souhaitée</label>
           <input class="form-input" type="date" id="booking-date">
         </div>
         <div id="slots-container" style="display:none;">
-          <label class="form-label" style="margin-bottom:8px;">Créneaux disponibles</label>
-          <div class="slots-grid" id="slots-grid"></div>
+          <p class="form-label" style="margin-bottom:8px;">Créneaux disponibles</p>
+          <div class="slots-grid" id="slots-grid" role="group" aria-label="Créneaux horaires disponibles"></div>
         </div>
-        <div id="slots-loading" style="display:none; font-size:13px; color:var(--brun-light); padding:8px 0;">Chargement des créneaux...</div>
+        <div id="slots-loading" role="status" aria-live="polite" style="display:none;font-size:13px;color:var(--brun-light);padding:8px 0;">Chargement des créneaux...</div>
         <div class="step-actions">
           <button class="btn btn-back" id="step3-back">Retour</button>
           <button class="btn btn-primary" id="step3-next" disabled>Continuer</button>
         </div>
       </div>
 
-      <!-- STEP 4 — CONFIRMER -->
-      <div class="step-panel" id="step-4">
-        <div class="booking-summary" id="booking-summary"></div>
-        <div class="alert alert-error" id="booking-error"></div>
+      <!-- STEP 4 -->
+      <div class="step-panel" id="step-4" role="region" aria-label="Confirmer la réservation">
+        <div class="booking-summary" id="booking-summary" aria-live="polite"></div>
+        <div class="alert alert-error" id="booking-error" role="alert"></div>
         <div class="step-actions">
           <button class="btn btn-back" id="step4-back">Retour</button>
           <button class="btn btn-mocha" id="btn-confirmer">Confirmer</button>
@@ -411,7 +403,7 @@
   </div>
 
   <!-- RGPD COOKIES BANNER -->
-  <div class="rgpd-banner" id="rgpd-banner">
+  <div class="rgpd-banner" id="rgpd-banner" role="dialog" aria-label="Gestion des cookies" aria-live="polite">
     <p>
       Nous utilisons des cookies essentiels au fonctionnement du site (session, préférences).
       En continuant, vous acceptez notre <a href="politique-confidentialite.html">politique de confidentialité</a>.
